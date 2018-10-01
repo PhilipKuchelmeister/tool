@@ -28,6 +28,10 @@ RUN apt install -y php7.2-imap php7.2-gd php7.2-zip
 
 RUN apt-get update
 
+RUN apt install -y w3m
+
+RUN apt-get -y install systemd
+
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
@@ -39,8 +43,8 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 EXPOSE 80
 
-#COPY www /var/www/site
+COPY www /var/www/site
 
-#COPY apache-config.conf /etc/apache2/sites-enabled/000-default.conf
+COPY apache-config.conf /etc/apache2/sites-enabled/000-default.conf
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
