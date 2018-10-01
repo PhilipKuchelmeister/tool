@@ -1,6 +1,16 @@
-FROM ubuntu 
+FROM ubuntu:12.04
+
+MAINTAINER hotellistat
+
 RUN apt-get update 
-RUN apt-get install –y apache2 
-RUN apt-get install –y apache2-utils 
-RUN apt-get clean 
-EXPOSE 80 CMD [“apache2ctl”, “-D”, “FOREGROUND”]
+RUN apt-get install –y apache2
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/*
+
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log/apache2
+
+EXPOSE 80
+
+CMD [“/usr/sbin/apache2”, “-D”, “FOREGROUND”]
