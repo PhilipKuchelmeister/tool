@@ -3,9 +3,7 @@ FROM ubuntu:12.04
 MAINTAINER hotellistat
 
 RUN apt-get update 
-RUN apt-get install apache2
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y apache2 && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
