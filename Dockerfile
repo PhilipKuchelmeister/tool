@@ -39,8 +39,8 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 EXPOSE 80
 
-COPY www /var/www/site
+#COPY www /var/www/site
 
-COPY apache-config.conf /etc/apache2/sites-enabled/000-default.conf
+#COPY apache-config.conf /etc/apache2/sites-enabled/000-default.conf
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
