@@ -27,3 +27,14 @@ RUN apt install -y php7.2-cli php7.2-common php7.2-curl php7.2-mbstring php7.2-m
 RUN apt install -y php7.2-imap php7.2-gd php7.2-zip
 
 RUN apt-get update
+
+RUN echo "ServerName localhost" >> /etc/apache2/httpd.conf
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+EXPOSE 80
+
+ADD www /var/www/site
+
+ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
+
+CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
